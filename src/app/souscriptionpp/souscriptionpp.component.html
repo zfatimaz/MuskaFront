@@ -1,0 +1,314 @@
+<div>
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <span>LISTE DES SOUSCRIPTIONS</span>
+        <span class="fill-remaining-space"></span>  
+    </mat-toolbar>    
+</div>
+<div class="p-d-flex">
+    <button mat-raised-button (click)="open(contentFicheSouscription)">
+      <mat-icon>add</mat-icon>Nouvelle 
+    </button>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header bg-primary">
+     <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >Nouvelle Souscription</h1>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>		
+     </button>
+    </div>
+  <div class="modal-body">
+      <form #f="ngForm"  (ngSubmit)="onSubmit(f)" novalidate>
+
+        <div class="form-group col-md-4">
+            <label for="id_adherant">Souscripteur</label>
+            <div  *ngIf="adherants"></div>
+            <select  [(ngModel)]="selected" class="form-control" id="id_adherant" name="id_adherant"  ngModel>
+              <option *ngFor="let adheran of adherants" [ngValue]="adheran.id">{{adheran.code}}</option>
+            </select>
+          
+        </div>
+
+        <div class="form-group ">
+            <label for="idproduit">Produit</label>
+            <div  *ngIf="produits"></div>
+            <select [(ngModel)]="selectedd" class="form-control" id="id_produit" name="id_produit">
+              <option *ngFor="let prod of produits"  [ngValue]="prod.id">
+                
+                    <div *ngIf="prod.statut ==='Actif'">
+                      {{prod.libelle}}
+                    </div>
+              </option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="datSouscript">Date de souscription</label>
+            <div class="input-group"> 
+               <p-calendar  id="datSouscript" name="datSouscript" [showIcon]="true" inputId="datSouscript" ngModel></p-calendar>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="debutSouscription">Date de debut de la souscription</label>
+            <div class="input-group"> 
+               <p-calendar id="debutSouscription" name="debutSouscription" [showIcon]="true" inputId="debutSouscription" ngModel></p-calendar>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="finSouscription">Date de fin de la souscription</label>
+            <div class="input-group"> 
+               <p-calendar id="finSouscription" name="finSouscription" [showIcon]="true"  inputId="finSouscription" ngModel></p-calendar>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="montantSouscription">Montant de la souscription</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="montantSouscription" name="montantSouscription" ngModel>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="statut">Statut de la souscription</label>
+            <select class="form-control" id="statut" name="statut" ngModel>
+              <option>VALIDE</option>
+            </select>
+        </div>
+
+        <div class="form-group row">
+              <div class="form-group col-md-4">
+                  <label for="montantSouscription">Periodicité</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+                  </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="montantSouscription">Montant</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+                </div>
+              </div>
+        </div>
+
+        <div class="border text-center">
+          <button data-dismiss="modal" class="btn btn-primary">Enregistrer</button>
+          <!--<button type="button" class="btn btn-primary">Enregistrer</button>-->
+        </div>
+      </form>
+      
+  </div>
+</ng-template>
+
+<ng-template #contentFicheSouscription let-modal>
+  <div class="modal-header bg-primary">
+   <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >Nouvelle Souscription</h1>
+   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>		
+   </button>
+  </div>
+<div class="modal-body" style="max-width: 120%;">
+    <form #f="ngForm"  (ngSubmit)="onSubmit(f)" novalidate>
+
+      <div class="form-group">
+          <label for="id_adherant">Produit</label>
+          <div  *ngIf="adherants"></div>
+          <select  [(ngModel)]="selected" class="form-control" id="id_adherant" name="id_adherant"  ngModel>
+            <option *ngFor="let adheran of adherants" [ngValue]="adheran.id">{{adheran.code}}</option>
+          </select>
+      </div>
+      <div class="form-group row">
+              <div class="form-group col-md-6 ">
+                  <label for="idproduit">Montant souscription</label>
+                  <div  *ngIf="produits"></div>
+                    <select [(ngModel)]="selectedd" class="form-control" id="id_produit" name="id_produit">
+                      <option *ngFor="let prod of produits"  [ngValue]="prod.id">
+                        
+                            <div *ngIf="prod.statut ==='Actif'">
+                              {{prod.libelle}}
+                            </div>
+                      </option>
+                    </select>
+                  </div>
+
+              <div class="form-group col-md-4">
+                <label for="id_adherant">Versement</label>
+                <div  *ngIf="adherants"></div>
+                <select  [(ngModel)]="selected" class="form-control" id="id_adherant" name="id_adherant"  ngModel>
+                  <option>multiple</option>
+                  <option>unique</option>
+                </select>
+              
+              </div>
+
+      </div>        
+      <div class="form-group row">
+                <div class="form-group col-md-6">
+                    <label for="datSouscript">Périodicité paiements</label>
+                    <div class="input-group"> 
+                      <p-calendar  id="datSouscript" name="datSouscript" [showIcon]="true" inputId="datSouscript" ngModel></p-calendar>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="debutSouscription">Montant périodique</label>
+                    <div class="input-group"> 
+                      <p-calendar id="debutSouscription" name="debutSouscription" [showIcon]="true" inputId="debutSouscription" ngModel></p-calendar>
+                    </div>
+                </div>
+      </div>
+
+      <div class="form-group">
+          <label for="montantSouscription">Souscripteur</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscription" name="montantSouscription" ngModel>
+          </div>
+      </div>
+      <div class="form-group row">
+            <div class="form-group col-md-6">
+                <label for="montantSouscription">Tel</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="montantSouscription">WhatsApp/Telegram</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+              </div>
+            </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+            <label for="montantSouscription">CNIB/Psport</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="montantSouscription">établi(e) par</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+          <div class="form-group col-md-6">
+              <label for="montantSouscription">le</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+              </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="montantSouscription">Valable jusqu'au</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+            <label for="montantSouscription">Carte membre n°</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="montantSouscription">Valable jusqu'au</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="id_adherant">Bénéficiaire</label>
+        <div  *ngIf="adherants"></div>
+        <select  [(ngModel)]="selected" class="form-control" id="id_adherant" name="id_adherant"  ngModel>
+          <option *ngFor="let adheran of adherants" [ngValue]="adheran.id">{{adheran.code}}</option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+          <label for="montantSouscription">Tel</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+          </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="montantSouscription">E-mail</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+          <label for="montantSouscription">CNIB/Psport</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+          </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="montantSouscription">établi(e) par</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+          <label for="montantSouscription">le</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montantSouscriptionq" name="montantSouscription" ngModel>
+          </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="montantSouscription">Valable jusqu'au</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="montantSouscriptiond" name="montantSouscription" ngModel>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="montantSouscription">Service souscrit</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="montantSouscription" name="montantSouscription" ngModel>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="montantSouscription">Date fin de versements</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="montantSouscription" name="montantSouscription" ngModel>
+      </div>
+    </div>
+        <div class="modal-footer">
+          
+            <!--<button data-dismiss="modal" class="btn btn-primary">Enregistrer</button>-->
+            <button data-dismiss="modal" class="btn btn btn-success mr-auto" data-dismiss="modal">Enregistrer</button>
+            <button type="button" class="btn btn btn-danger mr-auto" data-dismiss="modal">Annuler</button>
+            <!--<button type="button" class="btn btn-primary">Enregistrer</button>-->
+          
+        </div>
+    </form>
+    
+</div>
+</ng-template>

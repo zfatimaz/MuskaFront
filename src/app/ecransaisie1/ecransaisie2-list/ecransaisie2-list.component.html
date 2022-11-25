@@ -1,0 +1,551 @@
+
+<head>
+  <script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js" integrity="sha512-jTgBq4+dMYh73dquskmUFEgMY5mptcbqSw2rmhOZZSJjZbD2wMt0H5nhqWtleVkyBEjmzid5nyERPSNBafG4GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<div class="p-d-flex">
+    <button mat-raised-button (click)="open(content)">
+      <mat-icon>add</mat-icon>Ajouter 
+    </button>
+    
+    <p-table #dt1 [value]="adherants" dataKey="numero_adherant" styleClass="p-datatable-sm p-datatable-gridlines" [resizableColumns]="true" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    selectionMode="single" [(selection)]="selectedAdherant"
+     
+    [globalFilterFields]="['id','code','nom','prenom','datnaiss','datinscript','lieunaiss','nompere','nommere','sexe',
+                          'residence','sectvill','profession','sitmatri','telephone','email','numreseau','bp',
+                          'persprev','numpersprev','emailpersprev']">
+    
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+          
+          <span class="p-input-icon-right p-ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher"/>
+            </span>
+            &nbsp;
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="imprimerRecu()" class="p-button-success p-mr-2"  pTooltip="XLS" value="Choose a category" tooltipPosition="bottom"></button>
+            &nbsp;
+      </div>
+    </ng-template>
+
+      <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn pSortableColumn="id">Id<p-sortIcon field="id"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="code">Code<p-sortIcon field="code"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="nom"> Nom<p-sortIcon field="nom"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="prenom"> Prenom<p-sortIcon field="prenom"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="datnaiss"> Naissance<p-sortIcon field="datnaiss"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="datinscript"> Inscription<p-sortIcon field="datinscript"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="lieunaiss"> lieuNaiss<p-sortIcon field="lieunaiss"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="nompere"> Père<p-sortIcon field="nompere"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="nommere"> Mère<p-sortIcon field="nommere"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="sexe"> Sexe<p-sortIcon field="sexe"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="residence">Résidence<p-sortIcon field="residence"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="sectvill">Secteur/village<p-sortIcon field="sectvill"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="profession">Profession<p-sortIcon field="profession"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="sitmatri">Situation<p-sortIcon field="sitmatri"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="telephone">Telephone<p-sortIcon field="telephone"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="numreseau">NRSocial<p-sortIcon field="numreseau"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="bp">BP<p-sortIcon field="bp"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="persprev">PAPrevenir<p-sortIcon field="persprev"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="numpersprev">NPAPrevenir<p-sortIcon field="numpersprev"></p-sortIcon></th>
+            <th pResizableColumn pSortableColumn="emailpersprev">EPAPrevenir<p-sortIcon field="emailpersprev"></p-sortIcon></th>
+            
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-adherants>
+          <tr>
+            <td>{{adherants.id}}</td>
+            <td>{{adherants.code}}</td>
+            <td>{{adherants.nom}}</td>
+            <td>{{adherants.prenom}}</td>
+            <td>{{adherants.datnaiss | date: 'dd/MM/yyyy'}}</td>
+            <td>{{adherants.datinscript | date: 'dd/MM/yyyy'}}</td>
+            <td>{{adherants.lieunaiss}}</td>
+            <td>{{adherants.nompere}}</td>
+            <td>{{adherants.nommere}}</td>
+            <td>{{adherants.sexe}}</td>
+            <td>{{adherants.residence}}</td>
+            <td>{{adherants.sectvill}}</td>
+            <td>{{adherants.profession}}</td>
+            <td>{{adherants.sitmatri}}</td>
+            <td>{{adherants.telephone}}</td>
+            <td>{{adherants.email}}</td>
+            <td>{{adherants.numreseau}}</td>
+            <td>{{adherants.bp}}</td>
+            <td>{{adherants.persprev}}</td>
+            <td>{{adherants.numpersprev}}</td>
+            <td>{{adherants.emailpersprev}}</td>
+            
+            
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="openDetails(contentDetails, adherants)">
+                <i class="fa fa-search"></i>D</button>
+                <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit, adherants)">
+                  <i class="fa fa-edit"></i>M</button>
+                  <button class="btn btn-sm btn-success" (click)="openPrint(adherants)">
+                    <i class="fa fa-edit"></i>I
+                  </button>
+              <!--<button pButton type="button" icon="pi pi-pencil" data-iconpos="p-ml-auto" (click)="openDetails(contentDetails, adherant)"></button></td>-->
+          </tr>
+      </ng-template>
+    </p-table>
+</div>
+
+
+<ng-template #contentDetails let-modal>
+  <div class="modal-header bg-primary">
+    <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >DETAILS</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>		
+    </button>
+   </div>
+  <div class="modal-body">
+    <form>
+          <div class="form-group">
+              <label for="nom">Nom</label>
+            <div class="input-group">
+              <input id="nom" class="form-control" readonly>
+            </div>
+          </div>
+        <div class="form-group">
+            <label for="prenom">Prénom(s)</label>
+          <div class="input-group">
+            <input id="prenom" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="datnaiss">Date de naissance</label>
+            <div class="input-group">
+              <input id="datnaiss" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="datinscript">Date d'inscription</label>
+            <div class="input-group">
+              <input id="datinscript" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="lieunaiss">Lieu de naissance</label>
+            <div class="input-group">
+              <input id="lieunaiss" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="nompere">Nom du père</label>
+            <div class="input-group">
+              <input id="nompere" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="nommere">Nom de la mère</label>
+            <div class="input-group">
+              <input id="nommere" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sexe">Sexe</label>
+            <div class="input-group">
+              <input id="sexe" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="residence">Residence</label>
+            <div class="input-group">
+              <input id="residence" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sectvill">Secteur/Village</label>
+            <div class="input-group">
+              <input id="sectvill" class="form-control"readonly>
+            </div>
+        </div>
+
+              <div class="form-group">
+                <label for="profession">Profession</label>
+                  <div class="input-group">
+                    <input id="profession" class="form-control" readonly>
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="sitmatri">Situation matrimoniale</label>
+                  <div class="input-group">
+                    <input id="sitmatri" class="form-control" readonly>
+                  </div>
+              </div>
+        <div class="form-group">
+          <label for="telephone">Telephone</label>
+            <div class="input-group">
+              <input id="telephone" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+            <div class="input-group">
+              <input id="email" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="numreseau">Numéro réseau social</label>
+            <div class="input-group">
+              <input id="numreseau" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="bp">Boîte postale</label>
+            <div class="input-group">
+              <input id="bp" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="persprev">Personne à prévenir</label>
+            <div class="input-group">
+              <input id="persprev" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="numpersprev">Numéro de la personne à prévenir</label>
+            <div class="input-group">
+              <input id="numpersprev" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="emailpersprev">E-mail de la personne à prévenir</label>
+            <div class="input-group">
+              <input id="emailpersprev" class="form-control" readonly>
+            </div>
+        </div>
+    </form>
+    
+  </div>
+  <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
+  </div>
+  </ng-template>
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header bg-primary">
+     <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >Ajout d'un Adhérant</h1>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>		
+     </button>
+    </div>
+  <div class="modal-body">
+      <form  #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group row">
+              <div class="form-group col-md-6">
+                <label for="nom">Nom</label>
+                <div class="input-group">
+                  <input type="text" id="nom"  name="nom" class="form-control" ngModel required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="prenom">Prénom(s)</label>
+                <div class="input-group">
+                  <input id="prenom" name="prenom" class="form-control" ngModel required>
+                </div>
+              </div>
+        </div>
+        <div class="form-group row">
+                  <div class="form-group col-md-6">
+                    <label for="datinscript">Date de naissance</label>
+                    <div class="input-group">
+                      <input type="date"  id="datnaiss" name="datnaiss" class="form-control" ngModel required>
+                      <!--<p-inputMask  id="datnaiss" name="datnaiss" mask="99/99/9999"  slotChar="jj/mm/yyyy" value="10/10/1010" ngModel>
+                      </p-inputMask>-->
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="datinscript">Date d'inscription</label>
+                    <div class="input-group">
+                      <input type="date"  id="datinscript" name="datinscript" class="form-control" ngModel required>
+                      <!--<p-inputMask  id="datinscript" name="datinscript" mask="99/99/9999"  slotChar="jj/mm/yyyy" value="10/10/1010" ngModel>
+                      </p-inputMask>-->
+                    </div>
+                  </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group col-md-6">
+              <label for="lieunaiss">Lieu</label>
+              <div class="input-group">
+                <input id="lieunaiss" name="lieunaiss" class="form-control" ngModel required>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="sexe">Sexe</label>
+              <select class="form-control" id="sexe" name="sexe" ngModel required>
+                <option>Feminin</option>
+                <option>Masculin</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+              <div class="form-group col-md-6">
+                <label for="nompere">Nom du père</label>
+                <div class="input-group">
+                  <input id="nompere" name="nompere" class="form-control" ngModel required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="nommere">Nom de la mère</label>
+                <div class="input-group">
+                  <input id="nommere" name="nommere" class="form-control" ngModel required>
+                </div>
+              </div>
+        </div>
+
+        <div class="form-group row">
+              <div class="form-group col-md-6">
+                <label for="residence">Résidence</label>
+                <div class="input-group">
+                  <input id="residence" name="residence" class="form-control" ngModel required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="sectvill">Secteur/village</label>
+                <div class="input-group">
+                  <input id="sectvill" name="sectvill" class="form-control" ngModel required >
+                </div>
+              </div>
+        </div>
+        <div class="form-group row">
+                <div class="form-group col-md-6">
+                  <label for="profession">Profession</label>
+                  <div class="input-group">
+                    <input id="profession" name="profession" class="form-control" ngModel required>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="sitmatri">Situation matrimoniale</label>
+                  <div class="input-group">
+                    <input id="sitmatri" name="sitmatri" class="form-control" ngModel required>
+                  </div>
+                </div>
+        </div>
+        <div class="form-group row">
+              <div class="form-group col-md-6">
+                <label for="telephone">Téléphone</label>
+                <div class="input-group">
+                  <input id="telephone" name="telephone" class="form-control" ngModel required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email">E-mail</label>
+                <div class="input-group">
+                  <!--<input name="email"  [textMask]="{mask: mask}" class="form-control"  id="email" ngModel required>-->
+                  <!--<input type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" class="form-control" id="email" name="email"   ngModel>-->
+                  <input type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" class="form-control" id="email" name="email" ngModel>
+                   <!--<input [textMask]="{mask: mask}" type="email" id="email" name="email" class="form-control" ngModel>-->
+                </div>
+                <!--<small class="form-text text-danger">Please enter a correct email address.</small>-->
+              </div>
+        </div>
+        <div class="form-group row">
+              <div class="form-group col-md-6">
+                <label for="numreseau">Numéro réseau social</label>
+                <div class="input-group">
+                  <input id="numreseau" name="numreseau" class="form-control" ngModel required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="bp">Boite Postale</label>
+                <div class="input-group">
+                  <input id="bp" name="bp" class="form-control" ngModel required>
+                </div>
+              </div>
+        </div>
+        <div class="form-group">
+          <label for="persprev">Personne à prevenir</label>
+          <div class="input-group">
+            <input id="persprev" name="persprev" class="form-control" ngModel required>
+          </div>
+        </div>
+        <div class="form-group row">
+                <div class="form-group col-md-6">
+                  <label for="numpersprev">Numéro de la Personne à prevenir</label>
+                  <div class="input-group">
+                    <input id="numpersprev" name="numpersprev" class="form-control" ngModel required>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="emailpersprev">E-mail</label>
+                  <div class="input-group">
+                    <input id="emailpersprev" name="emailpersprev" class="form-control" ngModel required>
+                  </div>
+                </div>
+        </div>
+        <div class="border text-center">
+          <button type="submit" data-dismiss="modal" class="btn btn-primary" [disabled]="f.invalid">Enregistrer</button>
+          <!--<button type="button" class="btn btn-primary">Enregistrer</button>-->
+        </div>
+      </form> 
+      <!-- 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" (click)="onSave()">Enregistrer</button>
+        </div>
+      -->
+        <!--<div class="border text-center"> <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Save Changes</button> </div>-->
+      
+</div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header bg-primary">
+   <h1 class="modal-title" id="modal-basic-title3 center" style="margin: 0 auto;" >Modification d'un adhérant</h1>
+   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>		
+   </button>
+  </div>
+<div class="modal-body">
+    <form [formGroup]="editForm" novalidate>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <div class="input-group">
+          <input formControlName="nom" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom(s)</label>
+        <div class="input-group">
+          <input formControlName="prenom" class="form-control">
+        </div>
+      </div>
+          
+              <div class="form-group">
+                <label for="datnaiss">Date de naissance</label>
+                <div class="input-group">
+                  <p-inputMask formControlName="datnaiss"  mask="99/99/9999"  slotChar="mm/dd/yyyy"></p-inputMask>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="datinscript">Date d'inscription</label>
+                <div class="input-group">
+                  <p-inputMask formControlName="datinscript"  mask="99/99/9999"  slotChar="mm/dd/yyyy"></p-inputMask>
+                </div>
+              </div>
+          
+      
+            
+      <div class="form-group">
+        <label for="lieunaiss">Lieu</label>
+        <div class="input-group">
+          <input formControlName="lieunaiss" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nompere">Nom du père</label>
+        <div class="input-group">
+          <input formControlName="nompere" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sexe">Sexe</label>
+        <select class="form-control" formControlName="sexe">
+          <option>Feminin</option>
+          <option>Masculin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nommere">Nom de la mère</label>
+        <div class="input-group">
+          <input formControlName="nommere" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="residence">Résidence</label>
+        <div class="input-group">
+          <input formControlName="residence" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sectvill">Secteur/village</label>
+        <div class="input-group">
+          <input formControlName="sectvill" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="profession">Profession</label>
+        <div class="input-group">
+          <input formControlName="profession" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sitmatri">Situation matrimoniale</label>
+        <div class="input-group">
+          <input formControlName="sitmatri" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Téléphone</label>
+        <div class="input-group">
+          <input formControlName="telephone" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <div class="input-group">
+          <!--<p-inputMask id="email" name="email" mask="*@*.*"  slotChar="_@_._" ngModel></p-inputMask>-->
+          <input id="email-input" type="email" name="email-inputted" placeholder="placeholder-text">
+          <!--<input type="text" id="txtemail" formControlName="email" class="form-control" data-inputmask="'alias': 'email'">-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="numreseau">Numéro réseau social</label>
+        <div class="input-group">
+          <input formControlName="numreseau" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bp">Boite</label>
+        <div class="input-group">
+          <input formControlName="bp" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="persprev">Personne à prevenir</label>
+        <div class="input-group">
+          <input formControlName="persprev" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="numpersprev">Numéro de la Personne à prevenir</label>
+        <div class="input-group">
+          <input formControlName="numpersprev" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="emailpersprev">E-mail</label>
+        <div class="input-group">
+          <input formControlName="emailpersprev" class="form-control">
+        </div>
+      </div>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-primary" (click)="onSave()">Enregistrer</button>
+        <!--<button type="button" class="btn btn-primary">Enregistrer</button>-->
+      </div>
+    </form> 
+    <!-- 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="onSave()">Enregistrer</button>
+      </div>
+    -->
+      <!--<div class="border text-center"> <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Save Changes</button> </div>-->
+    
+</div>
+</ng-template>

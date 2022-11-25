@@ -1,0 +1,286 @@
+<mat-toolbar>
+    <span>{{service.form.controls['$key'].value?"Modifier un Adhérant":"Nouvel Adhérant"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>               clear</mat-icon></button>
+</mat-toolbar>
+<!--
+ <form [formGroup]="service.form" class="normal-form" (ngSubmit)="onSubmit()">
+    
+    <mat-grid-list cols="0" rowHeight="650px" >
+        
+        <mat-grid-tile>
+                <div class="list"> 
+                            
+                            <div class="center">
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text"  (keypress)="onlyCaracterKey($event)"  ng-change="test=test.toUpperCase();" formControlName="Nom" matInput placeholder="Nom"
+                                                id="Nom" name="Nom" [(ngModel)]="adherant.nom_adherant">
+                                            </mat-form-field>
+
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" (keypress)="onlyCaracterKeyP($event)" formControlName="Prenom" matInput placeholder="Prenom(s)"
+                                                id="Prenom" name="Prenom" [(ngModel)]="adherant.prenom_adherant" >
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" (keypress)="onlyCaracterKeyFonction($event)" formControlName="Fonction" matInput placeholder="Fonction"
+                                                id="Fonction" name="Fonction" [(ngModel)]="adherant.fonction_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" formControlName="Adresse" matInput placeholder="Adresse"
+                                                id="Adresse" name="Adresse" [(ngModel)]="adherant.adresse_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field>
+                                                <input type="text" formControlName="Telephone" matInput placeholder="Telephone"
+                                                id="Telephone" name="Telephone" [(ngModel)]="adherant.telephone_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-label>Sexe:&nbsp;</mat-label>
+                                            <mat-radio-group formControlName="Sexe" matInput placeholder="Sexe"   [(ngModel)]="adherant.sexe_adherant">
+                                                <mat-label>Masculin &nbsp;</mat-label>
+                                                <mat-radio-button value="M"></mat-radio-button>
+                                                <mat-label>Feminin&nbsp;</mat-label>
+                                                <mat-radio-button value="F"></mat-radio-button>
+                                            </mat-radio-group>
+                                            <br/>
+
+                                            <mat-form-field [textMask]="{mask: datemask, showMask:true}">
+                                                <mat-label>Adhesion</mat-label>
+                                                <input  [(ngModel)]="adherant.date_adhesion" formControlName="Adhesion" matInput [matDatepicker]="picker" placeholder="jj/mm/aaaa" (ngModelChange)="getChange($event)">
+                                                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field> 
+
+                                            <br/>
+                                             
+                                            <mat-form-field >
+                                                <input text="text" [(ngModel)]="dateeffet"  formControlName="PriseEffet" matInput placeholder="Date de prise d'effet"   >
+                                                
+                                            </mat-form-field>
+                                            
+                                            <br/>
+                                            <mat-form-field>
+                                                <input [(ngModel)]="adherant.date_fin" formControlName="DateFin" matInput [matDatepicker]="picker_fin" placeholder="Date de fin">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_fin"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker_fin></mat-datepicker>
+                                            </mat-form-field>
+                                            <br/>
+                                            
+                                            <mat-form-field [style.width.px]=327>
+                                                <input [(ngModel)]="adherant.service_souscrit" formControlName="ServiceSouscrit" matInput placeholder="Service souscrit">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field>
+                                                <input type="text" [(ngModel)]="adherant.montant_souscription" pInputText (keypress)="onlyNumberKey($event)" formControlName="MontantSouscription" matInput placeholder="Montant de la souscription" >
+                                            </mat-form-field>
+                                            <div class="button-row">
+                                                <button mat-raised-button color="primary" type="submit">Enregistrer</button>&nbsp;&nbsp;&nbsp;
+                                                <button mat-raised-button color="warn">Annuler</button>      
+                                            </div>  
+                            </div>  
+                    
+                </div>
+         
+        </mat-grid-tile> 
+        
+    </mat-grid-list>
+   
+</form>
+-->
+<!--
+<form class="container-fluid">
+  <div class="control-group">
+      <div class="controls controls-row row-fluid">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" [style.width.px]=100 />
+        <input type="password" class="form-control" id="inputPassword4" placeholder="Password"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 controls controls-row row-fluid">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+
+
+
+
+  <form class="container-fluid form-inline">
+    <div class="control-group">
+
+        <div class="controls row-fluid">
+            <input type="text" class="span11" placeholder="Street" />
+        </div>
+
+        <div class="controls controls-row row-fluid">
+            <label for="inputEmail4">Email</label>
+            <input type="text" class="span4 form-control" placeholder="Zip" />
+            <label for="inputEmail4">password</label>
+            <input type="text" class="span7 form-control" placeholder="City" />
+        </div>
+    </div>
+</form>
+-->
+
+<!--
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">M/Mme/Mlle</label>
+      <input type="text" pInputText class="form-control" id="inputEmail4">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <span>Né(e) le</span>
+      <p-inputMask mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy"></p-inputMask>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">à</label>
+    <input type="text" class="form-control" id="inputAddress">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">De</label>
+    <input type="text" class="form-control" id="inputAddress2">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">et de</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Résidant à</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Profession</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">N° tél</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Email</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">N° Réseau social</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">BP</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Prévenir si besoin</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Tél</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Email</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+-->
+<!--
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-md-6">
+      <label for="firstname">Firstname</label>
+      <input id="firstname" type="text" pInputText> 
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+      <label for="lastname">Lastname</label>
+      <input id="lastname" type="text" pInputText> 
+  </div>
+  <div class="p-field p-col-12">
+      <label for="address">Address</label>
+      <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+      <label for="city">City</label>
+      <input id="city" type="text" pInputText> 
+  </div>
+  <div class="p-field p-col-12 p-md-3">
+      <label for="state">State</label>
+      <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Select" optionLabel="name"></p-dropdown>
+  </div>
+  <div class="p-field p-col-12 p-md-3">
+      <label for="zip">Zip</label>
+      <input id="zip" type="text" pInputText> 
+  </div>
+</div>
+-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>

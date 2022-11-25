@@ -1,0 +1,15 @@
+/*reset ces propietes permettent de centrer l'image et la box de connxion
+elle permet aussi de reduire l'espace qui existerait entre l'image et le box de connexion mais il faut enlever
+fxFlexFill au niveau du div de la box de connexion primary*/
+
+    div{
+        margin: 0px;
+        padding: 0px;
+        margin-top: -220px;
+        align-items: center;
+        }
+        .form-full-width {
+            min-width: 1750px;
+            max-width: 1500px;
+            width:50%;
+        }

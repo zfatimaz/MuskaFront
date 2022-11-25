@@ -1,0 +1,23 @@
+
+            <div fxLayoutAlign="center center" fxFlexFill>
+            
+                <img src="assets/Capture.PNG" alt="image"/>
+             </div>
+             <form #userForm="ngForm" class="form-full-width">
+                 <div fxLayoutAlign="center center">
+                     <mat-card fxFlex="25">
+                         <mat-toolbar color=#d50022>Ecran de connection</mat-toolbar>
+                         <form fxLayoutAlign="strech" fxLayout="column" >
+                             <mat-form-field >
+                             <span matPrefix> <mat-icon>account_circle</mat-icon> &nbsp; </span>
+                             <input matInput [(ngModel)]="user.nomutilisateur" name="nomutilisateur" placeholder="Nom utilisateur" type="text" id="nomutilisateur">
+                             </mat-form-field>
+                             <mat-form-field >
+                                 <span matPrefix> <mat-icon>lock</mat-icon> &nbsp; </span>
+                                         <input matInput type="password" [(ngModel)]="user.motdepasse" name="motdepasse" placeholder="Mot de passe" id="motdepasse">
+                             </mat-form-field>
+                             <button type="submit" class="btn btn-danger w-100" (click)="onLog()">Connection</button>
+                         </form>
+                     </mat-card>  
+                 </div>
+             </form>

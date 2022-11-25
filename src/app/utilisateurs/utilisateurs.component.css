@@ -1,0 +1,41 @@
+.modal-header{
+    color: white;
+    font: size 15px;;
+  }
+  .modal-body {
+    font-size: 16px;
+    overflow-y: auto;
+}
+.col-chk {
+  margin: left 150px;
+}
+.col-8{
+  float: left;
+  width: 8%;
+  margin: top 5px;
+}
+.col-35{
+  float: left;
+  width: 35%;
+  margin: top -10px;
+
+}
+
+
+
+.modal-content {
+ 
+  /* 80% of window height */
+
+  height: 60%;
+
+  background-color:#BBD6EC;
+
+}       
+.modal-dialog {
+ 
+          width: 360px;
+ 
+          height:600px !important;
+ 
+}

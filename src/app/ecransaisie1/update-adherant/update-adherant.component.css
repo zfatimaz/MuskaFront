@@ -1,0 +1,4 @@
+p.coucou {
+    /* sauf ceux avec la classe coucou */
+    visibility: hidden;
+  }

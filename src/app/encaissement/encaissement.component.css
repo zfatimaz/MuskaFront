@@ -1,0 +1,15 @@
+.modal-header{
+    color: white;
+    font: size 15px;;
+  }
+  .modal-body {
+    font-size: 16px;
+    overflow-y: auto;
+}
+
+option:empty {
+    display: none;
+ }
+ 
+
+ 

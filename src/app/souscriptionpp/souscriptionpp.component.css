@@ -1,0 +1,19 @@
+.modal-header{
+    color: white;
+    font: size 15px;;
+  }
+  .modal-body {
+    font-size: 16px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+body .modal {
+  /* new custom width */
+  width: 560px;
+  /* must be half of the width, minus scrollbar on the left (30px) */
+  margin-left: -280px;
+}
+.app-modal-window .modal-body {
+  width: 700px;
+}

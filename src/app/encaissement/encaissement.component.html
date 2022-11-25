@@ -1,0 +1,177 @@
+<div>
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <span>LISTE DES ENCAISSEMENTS-ADHESION</span>
+        <span class="fill-remaining-space"></span>  
+    </mat-toolbar>    
+</div>
+<div class="p-d-flex">
+    <button  mat-raised-button (click)="open(content)">
+      <mat-icon>add</mat-icon>Ajouter 
+    </button>
+</div>
+
+
+
+
+<ng-template #content let-modal >
+    <div class="modal-header bg-primary" >
+            <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >Encaisssement d'une Adhésion</h1>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" >
+                <span aria-hidden="true">&times;</span>		
+            </button>
+    </div>
+    <div class="modal-body" >
+        
+                <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                    <div class="form-group">
+                        <label for="code">Adherant</label>
+                        <div  *ngIf="adherans"></div>
+                        <select  [(ngModel)]="selected" class="form-control" id="code" name="code" (ngModelChange)="getChange($event)" required>
+                            <option *ngFor="let adheran of adherans" [ngValue]="adheran.code">
+                                <div *ngIf="adheran.statutadhesion ==='nonpayé'">
+                                    {{adheran.code}}
+                                  </div>
+                            </option>
+                            
+                        </select>
+                        
+                    </div>
+                    <!--
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <div class="input-group">
+                          <input type="text" id="nom" name="nom" class="form-control">
+                        </div>
+                      </div>
+                    -->
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <div class="input-group">
+                          <input type="text"  id="nom" name="nom" class="form-control" [(ngModel)]="nomUtil" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">prenom</label>
+                        <div class="input-group">
+                          <input type="text" id="prenom" name="prenom" class="form-control" [(ngModel)]="prenomUtil" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="datnaiss">Date de naissance</label>
+                        <div class="input-group">
+                          <input type="text" id="datnaiss" name="datnaiss" class="form-control" [(ngModel)]="datnaissUtil" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <div class="input-group">
+                          <input type="text" id="telephone" name="telephone" class="form-control" [(ngModel)]="telephoneUtil" readonly>
+                        </div>
+                    </div>
+                    <!--  
+                    <div class="form-group">
+                                <label for="nom">Nom</label>
+                                    
+                                <div  *ngIf="adherans">
+                                    <select [(ngModel)]="selectedd" class="form-control" id="nom" name="nom">
+                                        
+                                        <option *ngFor="let adheran of adherans"  [ngValue]="adheran.nom">
+                                                <div *ngIf="adheran.code ==codeAdherant">
+                                                    <p>{{adheran.nom}}</p>
+                                                </div>
+                                        </option>
+                                    </select>
+                
+                               </div>            
+                    </div>
+                -->
+                <!--
+                    <div class="form-group">
+                        <label for="prenom">Prénom(s)</label>
+                        <div  *ngIf="adherans">
+                            <select [(ngModel)]="selecteddd" class="form-control" id="prenom" name="prenom">
+                                
+                                    <option *ngFor="let adheran of adherans"  [ngValue]="adheran.prenom" >
+                                            <div *ngIf="adheran.code ==codeAdherant">
+                                                {{adheran.prenom}}
+                                            </div>
+                                    </option>
+                            </select>
+                       </div>
+                    </div>
+                -->
+                <!--
+                    <div class="form-group row">
+                            <div class="form-group col-md-6">
+                                <label for="datnaiss">Date de naissance</label>
+                                <div  *ngIf="adherans">
+                                    <select [(ngModel)]="selectedddd" class="form-control" id="datnaiss" name="datnaiss">
+                                        
+                                        <option *ngFor="let adheran of adherans"  [ngValue]="adheran.datnaiss" >
+                                                <div *ngIf="adheran.code ==codeAdherant">
+                                                    {{adheran.datnaiss}}
+                                                </div>
+                                        </option>
+                                    </select>
+                               </div>
+                            </div>
+                        
+                            <div class="form-group col-md-6">
+                                <label for="telephone">Téléphone</label>
+                                <div  *ngIf="adherans">
+                                    <select [(ngModel)]="selecteddddd" class="form-control" id="telephone" name="telephone">
+                                        
+                                    <option *ngFor="let adheran of adherans"  [ngValue]="adheran.telephone" >
+                                            <div *ngIf="adheran.code ==codeAdherant">
+                                                {{adheran.telephone}}
+                                            </div>
+                                    </option>
+                                    </select>
+                               </div>
+                            </div>
+                    
+                    -->
+                    <div class="form-group row">
+                            <div class="form-group col-md-6">
+                                <label for="modedepaiement">Mode de paiement</label>
+                                
+                                    <select class="form-control" id="modedepaiement" name="modedepaiement" ngModel
+                                    [(ngModel)]="select"
+                                    >
+                                        <option >Espèces</option>
+                                        <option >Chèque</option>
+                                        <option >Mobile Money</option>
+                                        <option >Virement</option>
+                                    </select>
+                                  
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="datepaiement">Date de paiement</label>
+                                <div class="input-group">
+                                <input type="date"  id="datepaiement" name="datepaiement" class="form-control" ngModel>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="montant">Montant</label>
+                        <div  *ngIf="droitadhesion"></div>
+                        <select  [(ngModel)]="selectd" class="form-control" id="montant" name="montant"  [(ngModel)]="montantUtil" required>
+                            <option *ngFor="let droitadesion of droitadhesion" [ngValue]="droitadesion.montant">{{droitadesion.montant}}</option>
+                        </select>
+                    </div> 
+                  
+                    <div class="modal-footer">
+          
+                        <!--<button data-dismiss="modal" class="btn btn-primary">Enregistrer</button>-->
+                        <button data-dismiss="modal" class="btn btn btn-success mr-auto" [disabled]="f.invalid">Enregistrer</button>
+                        
+                        <!--<button type="button" class="btn btn-primary">Enregistrer</button>-->
+                      
+                    </div>       
+                </form>
+ 
+
+

@@ -1,0 +1,54 @@
+<!--
+<h2 mat-dialog-title></h2>
+
+<mat-dialog-content [formGroup]="form">
+  
+    <mat-form-field>
+        <input matInput
+                placeholder="Nom"
+               formControlName="description">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+               <input matInput
+               placeholder="Prenom"
+              formControlName="description">
+    </mat-form-field>
+      
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>
+-->
+
+<ng-template #contentDetails let-modal>
+    <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title1">New Friend</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>		
+     </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+            <label for="nom">Nom</label>
+           <div class="input-group">
+            <input id="fnom" class="form-control">
+           </div>
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom</label>
+           <div class="input-group">
+            <input id="fprenom" class="form-control">
+           </div>
+        </div>
+      </form>
+    
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+    </ng-template>

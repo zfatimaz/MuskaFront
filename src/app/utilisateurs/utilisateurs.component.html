@@ -1,0 +1,117 @@
+<div>
+    <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <span>LISTE DES UTILISATEURS</span>
+        <span class="fill-remaining-space"></span>  
+    </mat-toolbar>    
+</div>
+<div class="p-d-flex">
+    <button mat-raised-button (click)="open(formUtilisateur)">
+      <mat-icon>add</mat-icon>Ajouter 
+    </button>
+</div>
+<ng-template #formUtilisateur let-modal>
+    <div class="modal-header bg-primary">
+        <h1 class="modal-title" id="modal-basic-title2 center" style="margin: 0 auto;" >Ajout d'un nouveau utilisateur</h1>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+           <span aria-hidden="true">&times;</span>		
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="form-group">
+                <label for="libelle">Nom</label>
+                <div class="input-group">
+                  <input type="text" id="nom" name="nom" class="form-control"ngModel (ngModelChange)="getChange($event)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="libelle">Prénom</label>
+                <div class="input-group">
+                  <input type="text" id="prenom" name="prenom" class="form-control" ngModel (ngModelChange)="getChangeP($event)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="libelle">Login</label>
+                <div class="input-group">
+                  <input type="text" id="nomutilisateur" name="nomutilisateur" class="form-control" ngModel (ngModelChange)="getChangeLogin($event)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="libelle">Mot de passe</label>
+                <div class="input-group">
+                  <input type="password" id="motdepasse" name="motdepasse" class="form-control" ngModel (ngModelChange)="getChangeM($event)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datepaiement">Date de creation</label>
+                <div class="input-group">
+                    <input type="date"  id="datecreation" name="datecreation" class="form-control" ngModel (ngModelChange)="getChangeD($event)">
+                </div>
+            </div>
+          <!--
+            <div class="checkbox" *ngFor="let item of roles">
+                <label>
+                  <input formControlName="interestSectors" type="checkbox" value="{{item.id}}" (change)="onCheckboxChange(item,$event)">{{item.libelle}}</label>
+              </div>
+            -->
+            <!--  
+            <div class="form-group">
+                <label for="roles">ROLES</label>
+                <div *ngFor="let item of roles" class="row">
+                        <div class="col-8 col-chk"> <input type="checkbox" value=" {{item.libelle}}" name="roles"  (change)="onchange($event)"  [(ngModel)]="item.isselected" > </div>
+                        <div class="col-35" style="font-weight: bold;"><label>{{item.libelle}}</label></div>    
+                </div>
+            </div>
+            -->
+            <div class="form-group">
+                <label for="roles">ROLES</label>
+                <div *ngFor="let item of roles" class="row">
+                        <div class="col-8 col-chk"> <input type="checkbox" value=" item.libelle" id="roles" name="roles" [(ngModel)]="selectedCities[item.libelle]" > </div>
+                        <div class="col-35" style="font-weight: bold;"><label>{{item.libelle}}</label></div>    
+                </div>
+            </div>
+        
+        <!--
+        <div class="form-group">
+            <label for="options">Options :</label>
+            <div *ngFor="let option of options">
+                <label>
+                    <input type="checkbox"
+                           name="options"
+                           value="{{option}}"
+                           [checked]="options.indexOf(option) >= 0"
+                           (change)="updateCheckedOptions(option, $event)"/>
+                    {{option}}
+                </label>
+            </div>
+        </div>
+        -->
+        <!--
+            <div class="form-group">
+                <label for="options">ROLES:</label>
+                <div *ngFor="let item of roles">
+                    <label>
+                        <input type="checkbox"
+                               name="roles"
+                               value="{{item.libelle}}"
+                               [(ngModel)]="item.isselected" (change)="onchange($event)">
+                        {{item.libelle}}
+                    </label>
+                </div>
+            </div>
+        -->
+        <!--
+            <div class="form-group">
+             <div class="checkbox" *ngFor="let item of roles">
+                <label>
+                  <input formControlName="interestSectors" type="checkbox" value="{{item.id}}" (change)="onCheckboxChange(item,$event)">{{item.libelle}}</label>
+              </div>
+            </div>
+            -->
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn btn-success mr-auto">Enregistrer</button> 
+            </div>   
+        </form>
+    </div>
+</ng-template>

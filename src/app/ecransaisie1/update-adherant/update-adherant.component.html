@@ -1,0 +1,93 @@
+
+ <body style="background-color:dimgray;">
+
+    
+
+ <form [formGroup]="service.form" class="normal-form" (ngSubmit)="onSubmit()">
+    
+    <mat-grid-list cols="0" rowHeight="650px" >
+        
+        <mat-grid-tile>
+                <div class="list">
+                    <div class="controles-container">
+                            
+                            <input type="hidden" formControlName="$key" >
+                            
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" (keypress)="onlyCaracterKey($event)"  ng-change="test=test.toUpperCase();" formControlName="Nom" matInput placeholder="Nom"
+                                                id="nom" name="nom" [(ngModel)]="adherant.nom_adherant">
+                                            </mat-form-field>
+
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" (keypress)="onlyCaracterKey($event)" formControlName="Prenom" matInput placeholder="Prenom(s)"
+                                                id="prenom" name="prenom" [(ngModel)]="adherant.prenom_adherant" >
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" (keypress)="onlyCaracterKey($event)" formControlName="Fonction" matInput placeholder="Fonction"
+                                                id="fonction" name="fonction" [(ngModel)]="adherant.fonction_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field [style.width.px]=327>
+                                                <input type="text" formControlName="Adresse" matInput placeholder="Adresse"
+                                                id="adresse" name="adresse" [(ngModel)]="adherant.adresse_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field>
+                                                <input type="text" formControlName="Telephone" matInput placeholder="Telephone"
+                                                id="telephone" name="telephone" [(ngModel)]="adherant.telephone_adherant">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-label>Sexe:&nbsp;</mat-label>
+                                            <mat-radio-group formControlName="Sexe" matInput placeholder="Sexe"   [(ngModel)]="adherant.sexe_adherant">
+                                                <mat-label>Masculin &nbsp;</mat-label>
+                                                <mat-radio-button value="M"></mat-radio-button>
+                                                <mat-label>Feminin&nbsp;</mat-label>
+                                                <mat-radio-button value="F"></mat-radio-button>
+                                            </mat-radio-group>
+                                            <br/>
+
+                                            <mat-form-field [textMask]="{mask: datemask, showMask:true}">
+                                                <mat-label>Adhesion</mat-label>
+                                                <input  [(ngModel)]="adherant.date_adhesion" formControlName="Adhesion" matInput [matDatepicker]="picker" placeholder="jj/mm/aaaa" (ngModelChange)="getChange($event)">
+                                                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field> 
+
+                                            <br/>
+                                             
+                                            
+                                            <mat-form-field >
+                                                <input type="text" [(ngModel)]="dateeffet"  formControlName="PriseEffet" matInput placeholder="Date de prise d'effet"   >
+                                                
+                                            </mat-form-field>
+
+                                            <br/>
+                                            <mat-form-field>
+                                                <input [(ngModel)]="adherant.date_fin" formControlName="DateFin" matInput [matDatepicker]="picker_fin" placeholder="Date de fin">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_fin"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker_fin></mat-datepicker>
+                                            </mat-form-field>
+                                            <br/>
+                                            
+                                            <mat-form-field [style.width.px]=327>
+                                                <input [(ngModel)]="adherant.service_souscrit" formControlName="ServiceSouscrit" matInput placeholder="Service souscrit">
+                                            </mat-form-field>
+                                            <br/>
+                                            <mat-form-field>
+                                                <input type="text" [(ngModel)]="adherant.montant_souscription" pInputText (keypress)="onlyNumberKey($event)" formControlName="MontantSouscription" matInput placeholder="Montant de la souscription" >
+                                            </mat-form-field>
+                                            <div class="button-row">
+                                                <button mat-raised-button color="primary" type="submit">Enregistrer</button>&nbsp;&nbsp;&nbsp;
+                                                <button mat-raised-button color="warn">Annuler</button>      
+                                            </div>    
+                    </div>
+                </div>
+         
+        </mat-grid-tile> 
+        
+    </mat-grid-list>
+   
+</form>
+</body>
